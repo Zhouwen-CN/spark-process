@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+  <!-- 指定 NameNode 的地址 -->
+  <property>
+    <name>fs.defaultFS</name>
+    <value>hdfs://hadoop110:8020</value>
+  </property>
+  <!-- 指定 hadoop 数据的存储目录 -->
+  <property>
+    <name>hadoop.tmp.dir</name>
+    <value>/opt/module/hadoop-2.6.0/data</value>
+  </property>
+  <!-- 配置 HDFS 网页登录使用的静态用户为 atguigu -->
+  <property>
+    <name>hadoop.http.staticuser.user</name>
+    <value>atguigu</value>
+  </property>
+  <!-- atguigu是用户名 -->
+  <property>
+      <name>hadoop.proxyuser.atguigu.hosts</name>
+      <value>*</value>
+  </property>
+  <property>
+      <name>hadoop.proxyuser.atguigu.groups</name>
+      <value>*</value>
+  </property>
+</configuration>
