@@ -2,6 +2,8 @@ package com.yeeiee
 
 import org.apache.spark.sql.SparkSession
 
+import scala.collection.mutable.ListBuffer
+
 /**
  * @Author: chen
  * @Date: 2023/7/2
@@ -16,9 +18,9 @@ object SparkTest {
 
     session.sql("select `id`, `name` from `student`").show()*/
 
-    List(1) match {
-      case List(x,_*) => println(111)
-      case _ => println(2222)
-    }
+    val list1: List[Int] = List(1, 2, 3, 4, 5, 6)
+    val list2: List[Int] = List(2,4,6)
+
+    println(list1.intersect(list2) == list2)
   }
 }

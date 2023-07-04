@@ -19,29 +19,25 @@ object JsonUtil extends Serializable {
   MAPPER.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
 
   /**
-   * 节点属性会被解析成tuple,需要转成json string
+   * 如果是string直接返回,别的类型转成json返回
    *
    * @param jsonObj
    * @return
    */
-  def toJsonStr(jsonObj: Any): String = MAPPER.writeValueAsString(jsonObj)
-
-
-  /*  def toJsonObj[T](jsonStr: String): Any = {
-      toJsonObj(jsonStr, classOf[Any])
-    }*/
+  def toJsonStr(jsonObj: Any): String = {
+    if (jsonObj.isInstanceOf[String]) {
+      jsonObj.toString
+    } else {
+      MAPPER.writeValueAsString(jsonObj)
+    }
+  }
 
   def toJsonMap[K, V](jsonObj: Any, keyType: Class[K], valueType: Class[V]): Map[K, V] = {
-    val jsonStr: String = toJsonStr(jsonObj)
-    toJsonObj(jsonStr, Map[K, V]().getClass)
+    toJsonObj(toJsonStr(jsonObj), Map[K, V]().getClass)
   }
 
   def toJsonObj[T](jsonObj: Any, valueType: Class[T]): T = {
-    if (jsonObj.isInstanceOf[String]) {
-      MAPPER.readValue(jsonObj.toString, valueType)
-    } else {
-      MAPPER.readValue(toJsonStr(jsonObj), valueType)
-    }
+    MAPPER.readValue(toJsonStr(jsonObj), valueType)
   }
 
   def toJsonObj(jsonObj: Any, classFullName: String): Any = {

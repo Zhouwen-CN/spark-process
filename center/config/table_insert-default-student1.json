@@ -17,5 +17,17 @@
     "table": "default.student1"
   },
   "transforms": [
+    {
+      "clazz": "ColumnTransform",
+      "ins": [
+        "a"
+      ],
+      "columns": [
+        {
+          "expr": "id+1",
+          "name": "id"
+        }
+      ]
+    }
   ]
 }

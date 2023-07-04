@@ -20,12 +20,14 @@ class HiveSink(
   override protected def getSinkFeature: String = table
 
   override protected def confirmedRun(context: ContextManager, tableName: String): Unit = {
-
     val outputColumns: List[String] = getOutputColumns(context)
 
-    context.session.getTable(tableName).selectExpr(outputColumns: _*).createOrReplaceTempView(in)
+    // 如果没有给定in参数, 则使用transform返回的, 一个任务只写一张表
+    val realTableName: String = Option(in).getOrElse(tableName)
 
-    context.session.insertTable(in, mode, table, partition)
+    context.session.getTable(realTableName).selectExpr(outputColumns: _*).createOrReplaceTempView(realTableName)
+
+    context.session.insertTable(realTableName, mode, table, partition)
   }
 
   private def getOutputColumns(context: ContextManager): List[String] = {
