@@ -160,6 +160,10 @@ class SessionProxy(appName: String, userConfig: ConfigManager, jobParam: ParamMa
     sqlContext.table(tableName)
   }
 
+  def cacheTable(tableName:String) :Unit={
+    sqlContext.cacheTable(tableName)
+  }
+
   def registerTable(exprs: List[String], table: String, filter: String): DataFrame = {
     val sqlText: String =
       s"""

@@ -1,11 +1,12 @@
 {
   "clazz": "CommonSingleSinkFlow",
   "config": {
-    "spark.dynamicAllocation.maxExecutors": "16"
+    "spark.dynamicAllocation.maxExecutors": "1"
   },
   "sources": [
     {
       "out": "a",
+      "cache": true,
       "clazz": "HiveSource",
       "table": "default.student"
     }
