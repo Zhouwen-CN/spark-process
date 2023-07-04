@@ -10,17 +10,16 @@ import com.yeeiee.utils.FileUtil
 
 /**
  * @Author: chen
- * @Date: 2023/7/2 14:21
+ * @Date: 2023/7/2
  * @Desc:
  */
 object Launcher extends Logging {
   def main(args: Array[String]): Unit = {
     /**
-     * 模拟参数,由脚本传进来
-     * 1.任务名称,配置文件名称 = 任务名称.json
-     * 2.日期分区
-     * 3.以及一些其他的自定义参数
-     * tip: 任务调度只穿任务名,脚本find文件,并封装task_name参数
+     * 模拟参数,脚本接受任务名称和分区日期,解析并封装参数
+     * 1.配置文件名称 = 任务名称.json
+     * 2.参数名1=参数值1
+     * 3.参数名2=参数值2
      */
     // todo 临时修改
     System.setProperty("HADOOP_USER_NAME", "atguigu")

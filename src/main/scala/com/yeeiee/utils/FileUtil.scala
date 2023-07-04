@@ -4,6 +4,11 @@ import com.yeeiee.constants.CharsetConstant
 
 import scala.io.{BufferedSource, Source}
 
+/**
+ * @Author: chen
+ * @Date: 2023/7/2
+ * @Desc:
+ */
 object FileUtil {
   def read(path: String, encode: String = CharsetConstant.DEFAULT): String = {
     var file: BufferedSource = null

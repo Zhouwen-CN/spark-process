@@ -2,6 +2,11 @@ package com.yeeiee.core.params
 
 import com.yeeiee.constants.StringConstant
 
+/**
+ * @Author: chen
+ * @Date: 2023/7/2
+ * @Desc:
+ */
 trait ParamManager {
   def parse(params: List[String]): ParamManager
 

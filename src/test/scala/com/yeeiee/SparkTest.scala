@@ -4,7 +4,7 @@ import org.apache.spark.sql.SparkSession
 
 /**
  * @Author: chen
- * @Date: 2023/7/2 21:03
+ * @Date: 2023/7/2
  * @Desc:
  */
 object SparkTest {

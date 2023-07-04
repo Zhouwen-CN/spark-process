@@ -2,7 +2,7 @@ package com.yeeiee.core.env
 
 /**
  * @Author: chen
- * @Date: 2023/7/2 18:36
+ * @Date: 2023/7/2
  * @Desc:
  */
 trait ConfigManager {

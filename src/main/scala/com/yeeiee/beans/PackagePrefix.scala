@@ -4,7 +4,7 @@ import com.yeeiee.constants.StringConstant
 
 /**
  * @Author: chen
- * @Date: 2023/7/2 17:30
+ * @Date: 2023/7/2
  * @Desc:
  */
 object PackagePrefix extends Enumeration {

@@ -5,6 +5,11 @@ import com.yeeiee.constants.StringConstant
 import com.yeeiee.core.env.{CommonConfigManager, ConfigManager, ContextManager, SessionProxy}
 import com.yeeiee.core.params.ParamManager
 
+/**
+ * @Author: chen
+ * @Date: 2023/7/2
+ * @Desc:
+ */
 abstract class AbstractFlow(config: Any) extends Attribute with Flow with Logging {
 
   protected def createContext(paramManager: ParamManager): ContextManager = {

@@ -4,7 +4,11 @@ import com.yeeiee.core.env.ContextManager
 import com.yeeiee.core.factory.{SinkFactory, SourceFactory, TransformFactory}
 import com.yeeiee.core.params.ParamManager
 
-
+/**
+ * @Author: chen
+ * @Date: 2023/7/2
+ * @Desc:
+ */
 class CommonSingleSinkFlow(config: Any, sources: List[Any], transforms: List[Any], sink: Any) extends AbstractFlow(config) {
   override def run(param: ParamManager): Unit = {
     val context: ContextManager = createContext(param)

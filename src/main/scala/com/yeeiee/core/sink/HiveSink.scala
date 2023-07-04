@@ -5,6 +5,11 @@ import com.yeeiee.core.env.ContextManager
 
 import scala.collection.mutable.ListBuffer
 
+/**
+ * @Author: chen
+ * @Date: 2023/7/3
+ * @Desc:
+ */
 class HiveSink(
                 in: String,
                 mode: String,

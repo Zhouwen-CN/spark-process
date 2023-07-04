@@ -9,6 +9,11 @@ import org.apache.spark.sql.catalog.Catalog
 import org.apache.spark.sql.expressions.UserDefinedFunction
 import org.apache.spark.sql.{DataFrame, SQLContext, SparkSession}
 
+/**
+ * @Author: chen
+ * @Date: 2023/7/2
+ * @Desc:
+ */
 object SessionProxy {
   private val PROXY_CONFIG: String = "proxy."
   private val TASK_PARALLELISM_MAX: String = "proxy.task.parallelism.max"

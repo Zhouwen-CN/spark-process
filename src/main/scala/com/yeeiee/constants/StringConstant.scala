@@ -1,5 +1,10 @@
 package com.yeeiee.constants
 
+/**
+ * @Author: chen
+ * @Date: 2023/7/2
+ * @Desc:
+ */
 object StringConstant extends Serializable {
   val EMPTY: String = ""
   val EQUAL: String = "="

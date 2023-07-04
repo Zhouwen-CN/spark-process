@@ -3,7 +3,11 @@ package com.yeeiee.core.env
 import com.yeeiee.beans.Logging
 import com.yeeiee.utils.JsonUtil
 
-
+/**
+ * @Author: chen
+ * @Date: 2023/7/2
+ * @Desc:
+ */
 class CommonConfigManager extends ConfigManager with Logging {
   private var elements: Map[String, String] = _
 

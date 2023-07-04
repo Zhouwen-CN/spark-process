@@ -4,7 +4,7 @@ import com.yeeiee.constants.StringConstant
 
 /**
  * @Author: chen
- * @Date: 2023/7/4 9:45
+ * @Date: 2023/7/4
  * @Desc:
  */
 object SqlUtil {

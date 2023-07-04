@@ -1,5 +1,10 @@
 package com.yeeiee.constants
 
+/**
+ * @Author: chen
+ * @Date: 2023/7/2
+ * @Desc:
+ */
 object CharsetConstant extends Serializable {
   val UTF8: String = "UTF-8"
   val GBK: String = "GBK"

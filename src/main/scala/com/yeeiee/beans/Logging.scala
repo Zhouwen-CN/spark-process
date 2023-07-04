@@ -2,6 +2,11 @@ package com.yeeiee.beans
 
 import org.slf4j.{Logger, LoggerFactory}
 
+/**
+ * @Author: chen
+ * @Date: 2023/7/2
+ * @Desc:
+ */
 trait Logging {
 
   private var logger: Logger = _

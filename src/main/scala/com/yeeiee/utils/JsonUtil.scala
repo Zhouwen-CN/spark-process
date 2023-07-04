@@ -3,7 +3,11 @@ package com.yeeiee.utils
 import com.fasterxml.jackson.databind.{DeserializationFeature, ObjectMapper}
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
 
-
+/**
+ * @Author: chen
+ * @Date: 2023/7/2
+ * @Desc:
+ */
 object JsonUtil extends Serializable {
   private val MAPPER = new ObjectMapper
 

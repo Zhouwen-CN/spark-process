@@ -2,6 +2,11 @@ package com.yeeiee.core.params
 
 import com.yeeiee.constants.StringConstant
 
+/**
+ * @Author: chen
+ * @Date: 2023/7/2
+ * @Desc:
+ */
 class KeyValueParamManager extends ParamManager {
   private var elements: Map[String, String] = _
 

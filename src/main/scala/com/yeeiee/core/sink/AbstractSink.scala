@@ -5,6 +5,11 @@ import com.yeeiee.constants.StringConstant
 import com.yeeiee.core.env.ContextManager
 import com.yeeiee.utils.StringUtil
 
+/**
+ * @Author: chen
+ * @Date: 2023/7/3
+ * @Desc:
+ */
 abstract class AbstractSink extends Attribute with Sink with Logging {
   private def confirm(context: ContextManager): Boolean = {
     val taskName: String = context.param.get(StringConstant.TASK_NAME)

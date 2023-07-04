@@ -4,6 +4,11 @@ import com.yeeiee.beans.{Attribute, Logging}
 import com.yeeiee.constants.StringConstant
 import com.yeeiee.utils.JsonUtil
 
+/**
+ * @Author: chen
+ * @Date: 2023/7/2
+ * @Desc:
+ */
 abstract class AbstractFactory[T] extends Factory[T] with Logging {
 
   def build(material: Any): T = {
