@@ -9,10 +9,9 @@ import scala.collection.mutable
 
 /**
  * @Author: chen
- * @Date: 2023/7/4 16:01
+ * @Date: 2023/7/4
  * @Desc:
  */
-
 class ColumnTransform(ins: List[String], out: String, columns: List[ColumnElement]) extends AbstractTransform(ins) {
   override def checkTableSize: Int = 1
 

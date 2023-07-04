@@ -4,12 +4,18 @@ import com.yeeiee.beans.{Attribute, Logging}
 import com.yeeiee.constants.StringConstant
 import com.yeeiee.core.env.ContextManager
 
+/**
+ * @Author: chen
+ * @Date: 2023/7/4
+ * @Desc:
+ */
 abstract class AbstractTransform(ins: List[String]) extends Attribute with Transform with Logging {
 
-  def checkTableSize:Int
+  def checkTableSize: Int
 
   /**
    * 检查ins是否为空,ins长度时候小于最小需要长度
+   *
    * @param tableNames
    * @return
    */

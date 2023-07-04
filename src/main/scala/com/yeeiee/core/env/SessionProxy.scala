@@ -160,7 +160,7 @@ class SessionProxy(appName: String, userConfig: ConfigManager, jobParam: ParamMa
     sqlContext.table(tableName)
   }
 
-  def cacheTable(tableName:String) :Unit={
+  def cacheTable(tableName: String): Unit = {
     sqlContext.cacheTable(tableName)
   }
 
