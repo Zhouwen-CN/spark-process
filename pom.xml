@@ -140,12 +140,31 @@
                 </executions>
             </plugin>
 
-            <!-- clean overwrite -->
+            <!-- clean and copy -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
                 <version>3.0.0</version>
                 <executions>
+                    <!-- clean -->
+                    <execution>
+                        <id>clean-file</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <delete>
+                                    <fileset dir="${output.dir}" erroronmissingdir="false">
+                                        <include name="${output.jar}"/>
+                                    </fileset>
+                                </delete>
+                            </target>
+                        </configuration>
+                    </execution>
+
+                    <!-- copy -->
                     <execution>
                         <id>copy-file</id>
                         <phase>package</phase>
