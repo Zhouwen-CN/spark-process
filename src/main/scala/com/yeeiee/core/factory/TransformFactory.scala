@@ -1,7 +1,7 @@
 package com.yeeiee.core.factory
 
 import com.yeeiee.beans.PackagePrefix
-import com.yeeiee.core.transform.abs.Transform
+import com.yeeiee.core.transform.Transform
 
 /**
  * @Author: chen

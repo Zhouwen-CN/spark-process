@@ -12,10 +12,8 @@ class HiveSource(
                   exprs: List[String],
                   table: String,
                   condition: String,
-                  ignores: List[String]) extends AbstractSource {
-
-  override def run(context: ContextManager): String = {
-
+                  ignores: List[String]) extends AbstractSource(out) {
+  override def confirmRun(context: ContextManager): String = {
     context.session
       .registerTable(exprs, table, condition)
       .drop(

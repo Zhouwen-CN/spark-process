@@ -19,7 +19,7 @@ object SparkTest {
     session.sql("select `id`, `name` from `student`").show()*/
 
     val list1: List[Int] = List(1, 2, 3, 4, 5, 6)
-    val list2: List[Int] = List(2,4,6)
+    val list2: List[Int] = List()
 
     println(list1.intersect(list2) == list2)
   }

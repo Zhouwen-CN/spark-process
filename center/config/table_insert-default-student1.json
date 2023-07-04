@@ -23,11 +23,12 @@
         "a"
       ],
       "columns": [
-        {
-          "expr": "id+1",
-          "name": "id"
-        }
-      ]
+      {
+        "expr": "id+1",
+        "name": "id"
+      }
+    ]
+
     }
   ]
 }

@@ -11,6 +11,11 @@ import com.yeeiee.utils.StringUtil
  * @Desc:
  */
 abstract class AbstractSink extends Attribute with Sink with Logging {
+  /**
+   * 检查任务名称和sink表名是否一致
+   * @param context
+   * @return
+   */
   private def confirm(context: ContextManager): Boolean = {
     val taskName: String = context.param.get(StringConstant.TASK_NAME)
 
