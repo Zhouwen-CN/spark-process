@@ -3,10 +3,11 @@ package com.yeeiee.core.env
 import com.yeeiee.beans.Logging
 import com.yeeiee.core.env.SessionProxy._
 import com.yeeiee.core.params.ParamManager
+import com.yeeiee.utils.SqlUtil
 import org.apache.spark.SparkContext
 import org.apache.spark.sql.catalog.Catalog
 import org.apache.spark.sql.expressions.UserDefinedFunction
-import org.apache.spark.sql.{SQLContext, SparkSession}
+import org.apache.spark.sql.{DataFrame, SQLContext, SparkSession}
 
 object SessionProxy {
   private val PROXY_CONFIG: String = "proxy."
@@ -69,7 +70,6 @@ class SessionProxy(appName: String, userConfig: ConfigManager, jobParam: ParamMa
   private val userDefineFunctionRegister: Map[String, UserDefinedFunction] = Map[String, UserDefinedFunction](
 
   )
-
 
   private val sparkSession: SparkSession = initialize()
   private val sparkConfig: Map[String, String] = configs
@@ -146,7 +146,42 @@ class SessionProxy(appName: String, userConfig: ConfigManager, jobParam: ParamMa
     configs
   }
 
-  /*private def sql(sqlText: String): DataFrame = {
+  private def executeSql(sqlText: String): DataFrame = {
+    logInfo(s"proxy will running sql: $sqlText")
+    sqlContext.sql(sqlText)
+  }
+
+  def getTable(tableName: String): DataFrame ={
+    sqlContext.table(tableName)
+  }
+
+  def registerTable(exprs: List[String], table: String, filter: String): DataFrame = {
+    val sqlText: String =
+      s"""
+         |${SqlUtil.select(exprs)}
+         |${SqlUtil.from(table)}
+         |${SqlUtil.where(filter)}
+         |""".stripMargin
+    executeSql(sqlText)
+  }
+
+  def insertTable(in:String,mode: String,out: String,partition: String): Unit = {
+    val sqlText =
+      s"""
+         |${SqlUtil.insert(mode, out)}
+         |${SqlUtil.partition(partition)}
+         |${SqlUtil.select()}
+         |${SqlUtil.from(in,check = false)}"""
+        .stripMargin
+    executeSql(sqlText)
+  }
+
+  def descTable(table: String): DataFrame = {
+    val sqlText: String = SqlUtil.desc(table)
+    executeSql(sqlText)
+  }
+
+  /*private def sql(sqlText: String): DataFrame = {m
     logInfo(s"Proxy will run sql: ${sqlText}")
     sqlContext.sql(sqlText)
   }

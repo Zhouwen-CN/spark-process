@@ -22,7 +22,9 @@ object Launcher extends Logging {
      * 3.以及一些其他的自定义参数
      * tip: 任务调度只穿任务名,脚本find文件,并封装task_name参数
      */
-    val params: List[String] = List("D:/work/study/spark-process/center/config/example.json", "task_name=example", "task_time=20230702")
+    // todo 临时修改
+    System.setProperty("HADOOP_USER_NAME", "atguigu")
+    val params: List[String] = List("D:\\work\\idea\\spark-process\\center\\config\\table_insert-default-student1.json", "task_name=table_insert-default-student1", "task_time=20230702")
     val taskConfigPath: String = params.head
     logInfo(s"loading task config path: [ $taskConfigPath ]")
     val realParams: List[String] = params.tail

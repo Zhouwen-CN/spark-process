@@ -10,12 +10,13 @@ class CommonSingleSinkFlow(config: Any, sources: List[Any], transforms: List[Any
     val context: ContextManager = createContext(param)
     var tableNames: List[String] = sources.map(s => SourceFactory.build(s).run(context))
 
-    Option(transforms) match {
-      case None => logWarning("common single sink flow transforms is empty ...")
-      case _ => transforms.foreach {
+    // 当为null 或者 为空时, 打印日志
+    transforms match {
+      case List(x,_*) => transforms.foreach {
         transform =>
           tableNames = TransformFactory.build(transform).run(context, tableNames)
       }
+      case _ => logWarning("common single sink flow transforms is empty ...")
     }
 
     SinkFactory.build(sink).run(context, tableNames.head)

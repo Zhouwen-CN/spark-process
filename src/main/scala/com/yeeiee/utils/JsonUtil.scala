@@ -33,7 +33,11 @@ object JsonUtil extends Serializable {
   }
 
   def toJsonObj[T](jsonObj: Any, valueType: Class[T]): T = {
-    MAPPER.readValue(jsonObj.toString, valueType)
+    if (jsonObj.isInstanceOf[String]) {
+      MAPPER.readValue(jsonObj.toString, valueType)
+    } else {
+      MAPPER.readValue(toJsonStr(jsonObj), valueType)
+    }
   }
 
   def toJsonObj(jsonObj: Any, classFullName: String): Any = {

@@ -4,25 +4,21 @@ import com.yeeiee.core.env.ContextManager
 import org.apache.spark.sql.DataFrame
 
 class HiveSource(
+                  out: String,
                   exprs: List[String],
                   table: String,
-                  condition: Any,
-                  ignores: List[String]
-                ) extends AbstractSource {
-  override def run(
-                    context: ContextManager
-                  ): DataFrame = {
+                  condition: String,
+                  ignores: List[String]) extends AbstractSource {
 
-    val filter = if (Option(condition).isDefined) {
-      ConditionElement.get(condition).expr.sql
-    } else {
-      StringConstant.EMPTY
-    }
+  override def run(context: ContextManager): String = {
 
     context.session
-      .createDataFrame(exprs, table, filter)
+      .registerTable(exprs, table, condition)
       .drop(
         Option(ignores).getOrElse(List.empty[String]): _*
       )
+      .createOrReplaceTempView(out)
+
+    out
   }
 }
