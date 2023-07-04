@@ -166,7 +166,7 @@ class SessionProxy(appName: String, userConfig: ConfigManager, jobParam: ParamMa
   }
 
   def insertTable(in:String,mode: String,out: String,partition: String): Unit = {
-    val sqlText =
+    val sqlText: String =
       s"""
          |${SqlUtil.insert(mode, out)}
          |${SqlUtil.partition(partition)}

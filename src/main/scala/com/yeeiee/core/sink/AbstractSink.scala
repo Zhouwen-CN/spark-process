@@ -7,7 +7,6 @@ import com.yeeiee.utils.StringUtil
 
 abstract class AbstractSink extends Attribute with Sink with Logging {
   private def confirm(context: ContextManager): Boolean = {
-
     val taskName: String = context.param.get(StringConstant.TASK_NAME)
 
     // table_insert-default-student1
