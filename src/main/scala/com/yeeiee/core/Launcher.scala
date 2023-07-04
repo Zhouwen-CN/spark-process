@@ -40,12 +40,9 @@ object Launcher extends Logging {
         flowConfig = flowConfig.replace(wrapKey, kv._2)
       })
 
-
     logInfo(s"building task for config: ${StringConstant.LINE_SEPARATOR}$flowConfig")
 
-    val flow: Flow = FlowFactory.build(
-      flowConfig
-    )
+    val flow: Flow = FlowFactory.build(flowConfig)
 
     logInfo(s"running flow: ${flow.getClass}")
     flow.run(paramManager)

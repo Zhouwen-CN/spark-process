@@ -151,7 +151,7 @@ class SessionProxy(appName: String, userConfig: ConfigManager, jobParam: ParamMa
     sqlContext.sql(sqlText)
   }
 
-  def getTable(tableName: String): DataFrame ={
+  def getTable(tableName: String): DataFrame = {
     sqlContext.table(tableName)
   }
 
@@ -165,13 +165,13 @@ class SessionProxy(appName: String, userConfig: ConfigManager, jobParam: ParamMa
     executeSql(sqlText)
   }
 
-  def insertTable(in:String,mode: String,out: String,partition: String): Unit = {
+  def insertTable(in: String, mode: String, out: String, partition: String): Unit = {
     val sqlText: String =
       s"""
          |${SqlUtil.insert(mode, out)}
          |${SqlUtil.partition(partition)}
          |${SqlUtil.select()}
-         |${SqlUtil.from(in,check = false)}"""
+         |${SqlUtil.from(in, check = false)}"""
         .stripMargin
     executeSql(sqlText)
   }
@@ -180,148 +180,4 @@ class SessionProxy(appName: String, userConfig: ConfigManager, jobParam: ParamMa
     val sqlText: String = SqlUtil.desc(table)
     executeSql(sqlText)
   }
-
-  /*private def sql(sqlText: String): DataFrame = {m
-    logInfo(s"Proxy will run sql: ${sqlText}")
-    sqlContext.sql(sqlText)
-  }
-
-  private def createTable(
-                           df: DataFrame,
-                           table: String,
-                           partitioned: String = StringConstant.EMPTY,
-                           stored: String,
-                           location: String,
-                           properties: Map[String, String]
-                         ): Unit = {
-    val view = createTempView(df)
-    val sqlText =
-      s"""
-         |${GrammarUtil.createTable(table)}
-         |${GrammarUtil.metaData(df)}
-         |${GrammarUtil.partitionedBy(partitioned)}
-         |${GrammarUtil.storedAs(stored)}
-         |${GrammarUtil.locationAt(location)}
-         |${GrammarUtil.tableProperties(properties)}
-         |${GrammarUtil.asSelect()}
-         |${GrammarUtil.from(view, check = false)}"""
-        .stripMargin
-    sql(sqlText)
-    removeTempView(view)
-  }
-
-  def getConfig(key: String): Option[String] = {
-    sparkConfig.get(key)
-  }
-
-  def broadcast[T: ClassTag](value: T): Broadcast[T] = sparkContext.broadcast(value)
-
-  def binaryFiles(path: String): RDD[(String, PortableDataStream)] = {
-    sparkContext.binaryFiles(path)
-  }
-
-  def binaryFiles(path: String, minPartitions: Int): RDD[(String, PortableDataStream)] = {
-    sparkContext.binaryFiles(path, minPartitions)
-  }
-
-  def createDataFrame(rowRDD: RDD[Row], schema: StructType): DataFrame = {
-    sqlContext.createDataFrame(rowRDD, schema)
-  }
-
-  def createRDD[T](seq: Seq[T]): RDD[T] = {
-    sparkContext.makeRDD(seq)
-  }
-
-
-  def createDataFrame(
-                       format: String,
-                       options: scala.collection.Map[String, String]
-                     ): DataFrame = {
-    sparkSession.read.format(format).options(options).load()
-  }
-
-  def createDataFrame(
-                       exprs: List[String],
-                       table: String,
-                       filter: String = StringConstant.EMPTY
-                     ): DataFrame = {
-    val sqlText =
-      s"""
-         |${GrammarUtil.select(exprs)}
-         |${GrammarUtil.from(table)}
-         |${GrammarUtil.where(filter)}"""
-        .stripMargin
-    sql(sqlText)
-  }
-
-  def createTempView(df: DataFrame, view: String = BaseUtil.generateUUID()): String = {
-    df.createTempView(view)
-    view
-  }
-
-  def createGlobalTempView(df: DataFrame, view: String = BaseUtil.generateUUID()): String = {
-    df.createGlobalTempView(view)
-    view
-  }
-
-  def removeTempView(view: String): Unit = {
-    sparkCatalog.dropTempView(view)
-  }
-
-  def removeGlobalTempView(view: String): Unit = {
-    sparkCatalog.dropGlobalTempView(view)
-  }
-
-  def registerUDAF(
-                    name: String,
-                    udaf: UserDefinedAggregateFunction
-                  ): UserDefinedAggregateFunction = {
-    sparkSession.udf.register(name, udaf)
-  }
-
-  def registerUDAF(
-                    udaf: UserDefinedAggregateFunction
-                  ): UserDefinedAggregateFunction = {
-    val className = udaf.getClass.getSimpleName
-    registerUDAF(className, udaf)
-  }
-
-  def createTable(
-                   df: DataFrame,
-                   table: String
-                 ): Unit = {
-    createTable(
-      df,
-      s"${table}_${jobParam.get(ParamConstant.TASK_TIME)}",
-      StringConstant.EMPTY,
-      FileFormat.ORC.toString,
-      StringConstant.EMPTY,
-      Map[String, String](
-        (TableProperty.ORCCOMPRESS.toString, ORCCompress.SNAPPY.toString)
-      )
-    )
-  }
-
-  def insertTable(
-                   df: DataFrame,
-                   mode: String,
-                   table: String,
-                   partition: String
-                 ): Unit = {
-    val view = createTempView(df)
-    val sqlText =
-      s"""
-         |${GrammarUtil.insert(mode, table)}
-         |${GrammarUtil.partitionOf(partition)}
-         |${GrammarUtil.select()}
-         |${GrammarUtil.from(view, check = false)}"""
-        .stripMargin
-    sql(sqlText)
-    removeTempView(view)
-  }
-
-  def descTable(table: String): DataFrame = {
-    val sqlText = GrammarUtil.desc(table)
-    sql(sqlText)
-  }*/
 }
