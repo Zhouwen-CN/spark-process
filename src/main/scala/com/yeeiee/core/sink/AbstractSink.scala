@@ -4,6 +4,7 @@ import com.yeeiee.beans.{Attribute, Logging}
 import com.yeeiee.constants.StringConstant
 import com.yeeiee.core.env.ContextManager
 import com.yeeiee.utils.StringUtil
+import org.apache.spark.sql.DataFrame
 
 /**
  * @Author: chen
@@ -13,6 +14,7 @@ import com.yeeiee.utils.StringUtil
 abstract class AbstractSink extends Attribute with Sink with Logging {
   /**
    * 检查任务名称和sink表名是否一致
+   *
    * @param context
    * @return
    */
@@ -28,11 +30,11 @@ abstract class AbstractSink extends Attribute with Sink with Logging {
 
   protected def getSinkFeature: String
 
-  protected def confirmedRun(context: ContextManager, tableName: String): Unit
+  protected def confirmedRun(context: ContextManager, df: DataFrame): Unit
 
-  override def run(context: ContextManager, tableName: String): Unit = {
+  override def run(context: ContextManager, df: DataFrame): Unit = {
     if (confirm(context)) {
-      confirmedRun(context, tableName)
+      confirmedRun(context, df)
     } else {
       throw new Exception("task name not equal to sink table name ...")
     }

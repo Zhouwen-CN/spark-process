@@ -5,14 +5,11 @@
   },
   "sources": [
     {
-      "out": "a",
-      "cache": true,
       "clazz": "HiveSource",
       "table": "default.student"
     }
   ],
   "sink": {
-    "in": "a",
     "clazz": "HiveSink",
     "mode": "overwrite",
     "table": "default.student1"
@@ -20,14 +17,12 @@
   "transforms": [
     {
       "clazz": "ColumnTransform",
-      "ins": [
-        "a"
-      ],
       "columns": [
         {
-        "expr": "id+1",
-        "name": "id"
-      }
-    ]}
+          "expr": "concat(id,name)",
+          "name": "name"
+        }
+      ]
+    }
   ]
 }

@@ -7,7 +7,7 @@ import com.yeeiee.constants.StringConstant
  * @Date: 2023/7/2
  * @Desc:
  */
-class Attribute {
+class Attribute() {
   private val clazz: String = StringConstant.EMPTY
 
   def getClazz: String = clazz

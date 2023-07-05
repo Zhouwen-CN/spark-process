@@ -1,6 +1,7 @@
 package com.yeeiee.core.env
 
 import com.yeeiee.beans.Logging
+import com.yeeiee.constants.StringConstant
 import com.yeeiee.core.env.SessionProxy._
 import com.yeeiee.core.params.ParamManager
 import com.yeeiee.utils.SqlUtil
@@ -8,6 +9,8 @@ import org.apache.spark.SparkContext
 import org.apache.spark.sql.catalog.Catalog
 import org.apache.spark.sql.expressions.UserDefinedFunction
 import org.apache.spark.sql.{DataFrame, SQLContext, SparkSession}
+
+import java.util.UUID
 
 /**
  * @Author: chen
@@ -174,19 +177,24 @@ class SessionProxy(appName: String, userConfig: ConfigManager, jobParam: ParamMa
     executeSql(sqlText)
   }
 
-  def insertTable(in: String, mode: String, out: String, partition: String): Unit = {
+  def insertTable(output: DataFrame, mode: String, out: String, partition: String): Unit = {
+    val uuid: String = UUID.randomUUID().toString.replaceAll(StringConstant.STRIKETHROUGH, StringConstant.EMPTY)
+    output.createOrReplaceTempView(uuid)
     val sqlText: String =
       s"""
          |${SqlUtil.insert(mode, out)}
          |${SqlUtil.partition(partition)}
          |${SqlUtil.select()}
-         |${SqlUtil.from(in, check = false)}"""
+         |${SqlUtil.from(uuid, check = false)}"""
         .stripMargin
     executeSql(sqlText)
+    sparkCatalog.dropTempView(uuid)
   }
 
   def descTable(table: String): DataFrame = {
     val sqlText: String = SqlUtil.desc(table)
     executeSql(sqlText)
   }
+
+
 }

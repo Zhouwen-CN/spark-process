@@ -2,6 +2,7 @@ package com.yeeiee.core.sink
 
 import com.yeeiee.constants.StringConstant
 import com.yeeiee.core.env.ContextManager
+import org.apache.spark.sql.DataFrame
 
 import scala.collection.mutable.ListBuffer
 
@@ -19,15 +20,12 @@ class HiveSink(
               ) extends AbstractSink {
   override protected def getSinkFeature: String = table
 
-  override protected def confirmedRun(context: ContextManager, tableName: String): Unit = {
+  override protected def confirmedRun(context: ContextManager, df: DataFrame): Unit = {
     val outputColumns: List[String] = getOutputColumns(context)
 
-    // 如果没有给定in参数, 则使用transform返回的, 一个任务只写一张表
-    val realTableName: String = Option(in).getOrElse(tableName)
+    val output: DataFrame = df.selectExpr(outputColumns: _*)
 
-    context.session.getTable(realTableName).selectExpr(outputColumns: _*).createOrReplaceTempView(realTableName)
-
-    context.session.insertTable(realTableName, mode, table, partition)
+    context.session.insertTable(output, mode, table, partition)
   }
 
   private def getOutputColumns(context: ContextManager): List[String] = {

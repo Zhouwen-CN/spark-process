@@ -1,4 +1,4 @@
-package com.yeeiee.core.source
+package com.yeeiee.core.transform.abs
 
 import com.yeeiee.core.env.ContextManager
 import org.apache.spark.sql.DataFrame
@@ -8,6 +8,6 @@ import org.apache.spark.sql.DataFrame
  * @Date: 2023/7/3
  * @Desc:
  */
-trait Source {
-  def run(context: ContextManager): DataFrame
+trait Transform {
+  def run(context: ContextManager, dfs: List[DataFrame]): List[DataFrame]
 }

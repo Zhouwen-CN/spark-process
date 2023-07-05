@@ -1,7 +1,5 @@
 package com.yeeiee
 
-import org.apache.spark.sql.SparkSession
-
 import scala.collection.mutable.ListBuffer
 
 /**
@@ -16,6 +14,16 @@ object SparkTest {
       .enableHiveSupport()
       .getOrCreate()
 
-    session.sql("select `id`, `name` from `student`").show()*/
+    import session.implicits._
+    val df: DataFrame = session.sparkContext.makeRDD(Seq(
+      (5, "zs"),
+      (6, "ls"),
+      (7, "ww")
+    )).toDF("id", "name")
+
+
+    session.sql("select * from " + df).show()*/
+
+    println(ListBuffer(List("zs", "ls", "ww").indices.toList: _*))
   }
 }

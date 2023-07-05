@@ -1,6 +1,7 @@
 package com.yeeiee.core.sink
 
 import com.yeeiee.core.env.ContextManager
+import org.apache.spark.sql.DataFrame
 
 /**
  * @Author: chen
@@ -8,5 +9,5 @@ import com.yeeiee.core.env.ContextManager
  * @Desc:
  */
 trait Sink {
-  def run(context: ContextManager, tableName: String): Unit
+  def run(context: ContextManager, df: DataFrame): Unit
 }
