@@ -27,7 +27,7 @@ abstract class AssembleTransform(alignment: Boolean, distinct: Boolean) extends 
 
     for (i <- NumberConstant.NUMBER_1 until operands.length) {
 
-      val operand: DataFrame = if (Option(alignment).getOrElse(NumberConstant.FALSE)) {
+      val operand: DataFrame = if (Option(alignment).getOrElse(NumberConstant.TRUE)) {
         operands(i).selectExpr(headColumns: _*)
       } else {
         operands(i)
