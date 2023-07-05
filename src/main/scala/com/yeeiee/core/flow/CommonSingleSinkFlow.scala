@@ -10,7 +10,12 @@ import org.apache.spark.sql.DataFrame
  * @Date: 2023/7/2
  * @Desc:
  */
-class CommonSingleSinkFlow(config: Any, sources: List[Any], transforms: List[Any], sink: Any) extends AbstractFlow(config) {
+class CommonSingleSinkFlow(
+                            config: Any,
+                            sources: List[Any],
+                            transforms: List[Any],
+                            sink: Any
+                          ) extends AbstractFlow(config) {
   override def run(param: ParamManager): Unit = {
     val context: ContextManager = createContext(param)
     var tableNames: List[DataFrame] = sources.map(s => SourceFactory.build(s).run(context))

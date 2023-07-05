@@ -159,15 +159,7 @@ class SessionProxy(appName: String, userConfig: ConfigManager, jobParam: ParamMa
     sqlContext.sql(sqlText)
   }
 
-  def getTable(tableName: String): DataFrame = {
-    sqlContext.table(tableName)
-  }
-
-  def cacheTable(tableName: String): Unit = {
-    sqlContext.cacheTable(tableName)
-  }
-
-  def registerTable(exprs: List[String], table: String, filter: String): DataFrame = {
+  def createTable(exprs: List[String], table: String, filter: String): DataFrame = {
     val sqlText: String =
       s"""
          |${SqlUtil.select(exprs)}
@@ -195,6 +187,4 @@ class SessionProxy(appName: String, userConfig: ConfigManager, jobParam: ParamMa
     val sqlText: String = SqlUtil.desc(table)
     executeSql(sqlText)
   }
-
-
 }

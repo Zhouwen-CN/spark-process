@@ -16,7 +16,7 @@ class HiveSource(
 
   override def run(context: ContextManager): DataFrame = {
     context.session
-      .registerTable(exprs, table, condition)
+      .createTable(exprs, table, condition)
       .drop(
         Option(ignores).getOrElse(List.empty[String]): _*
       )

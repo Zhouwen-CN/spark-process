@@ -12,7 +12,6 @@ import scala.collection.mutable.ListBuffer
  * @Desc:
  */
 class HiveSink(
-                in: String,
                 mode: String,
                 table: String,
                 partition: String,
