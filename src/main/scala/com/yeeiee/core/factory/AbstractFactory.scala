@@ -15,7 +15,7 @@ abstract class AbstractFactory[T] extends Factory[T] with Logging {
     val clazz: String = JsonUtil.toJsonObj(material, classOf[Attribute]).getClazz
 
     if (clazz.isEmpty) {
-      throw new Exception(s"the work clazz must be not empty ...")
+      throw new Exception("the work clazz must be not empty ...")
     }
 
     val correctClazz: String = getCorrectClazz(clazz)

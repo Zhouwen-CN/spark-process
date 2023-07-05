@@ -13,7 +13,7 @@ import scala.collection.mutable.ListBuffer
  */
 abstract class AbstractTransform extends TransformAttribute with Transform with Logging {
 
-  def realRun(context: ContextManager, operands: List[DataFrame]): DataFrame
+  protected def realRun(context: ContextManager, operands: List[DataFrame]): DataFrame
 
   override def run(context: ContextManager, dfs: List[DataFrame]): List[DataFrame] = {
     // 操作数列表,没有给定取默认

@@ -1,5 +1,7 @@
 package com.yeeiee
 
+import org.apache.spark.sql.{DataFrame, SparkSession}
+
 /**
  * @Author: chen
  * @Date: 2023/7/2
@@ -7,23 +9,24 @@ package com.yeeiee
  */
 object SparkTest {
   def main(args: Array[String]): Unit = {
-    /*System.setProperty("HADOOP_USER_NAME", "atguigu")
+    System.setProperty("HADOOP_USER_NAME", "atguigu")
     val session: SparkSession = SparkSession.builder().master("local[1]").appName("test")
       .enableHiveSupport()
       .getOrCreate()
 
     import session.implicits._
-    val df: DataFrame = session.sparkContext.makeRDD(Seq(
-      (5, "zs"),
-      (6, "ls"),
-      (7, "ww")
+    val df1: DataFrame = session.sparkContext.makeRDD(Seq(
+      ("a", 1), ("a", 1), ("b", 3), ("c", 4)
     )).toDF("id", "name")
 
+    val df2: DataFrame = session.sparkContext.makeRDD(Seq(
+      ("a", 1), ("a", 1), ("b", 3)
+    )).toDF("name", "id")
 
-    session.sql("select * from " + df).show()*/
 
-    //    println(ListBuffer(List("zs", "ls", "ww").indices.toList: _*))
+    df1.intersect(df2).show()
 
-    println(Option(List(0)).getOrElse(List.empty[String]).isEmpty)
   }
+
+  case class Student(id: Int, name: String)
 }

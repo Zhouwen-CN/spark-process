@@ -12,8 +12,8 @@ import org.apache.spark.sql.functions.expr
  * @Desc:
  */
 class ColumnTransform(columns: List[ColumnElement]) extends SingleOperandTransform {
-  override def realRun(context: ContextManager, operands: List[DataFrame]): DataFrame = {
 
+  override protected def realRun(context: ContextManager, operands: List[DataFrame]): DataFrame = {
     if (Option(columns).getOrElse(List.empty[ColumnElement]).isEmpty) {
       throw new Exception("usage columnTransform but columns is empty ...")
     }

@@ -19,7 +19,7 @@ object JoinTransform {
   /**
    * join类型
    */
-  object JoinFunc {
+  private object JoinFunc {
     val INNER: String = "inner"
     val FULL: String = "full"
     val LEFT: String = "left"
@@ -45,7 +45,7 @@ object JoinTransform {
   /**
    * 冲突字段以哪张表为主
    */
-  object ConflictStrategy {
+  private object ConflictStrategy {
     val LEFT: String = "l"
     val RIGHT: String = "r"
     val DEFAULT: String = StringConstant.EMPTY
@@ -54,7 +54,7 @@ object JoinTransform {
   /**
    * 广播哪张表
    */
-  object BroadcastStrategy {
+  private object BroadcastStrategy {
     val LEFT: String = "l"
     val RIGHT: String = "r"
 
@@ -72,7 +72,7 @@ class JoinTransform(
                    ) extends DoubleOperandTransform {
 
 
-  override def realRun(context: ContextManager, operands: List[DataFrame]): DataFrame = {
+  override protected def realRun(context: ContextManager, operands: List[DataFrame]): DataFrame = {
     val left: Dataset[Row] = operands(NumberConstant.NUMBER_0).alias(TableAlias.LEFT)
     val right: Dataset[Row] = operands(NumberConstant.NUMBER_1).alias(TableAlias.RIGHT)
 
@@ -93,10 +93,10 @@ class JoinTransform(
 
   private def getBroadcastStrategy: String = Option(bs).getOrElse(BroadcastStrategy.DEFAULT)
 
-  def getCondition: Column = {
+  private def getCondition: Column = {
     val onCondition: String = Option(condition).getOrElse(StringConstant.EMPTY)
     if (onCondition.isEmpty) {
-      throw new Exception(s"the join transform condition must be not empty ...")
+      throw new Exception("the join transform condition must be not empty ...")
     }
     expr(condition)
   }
@@ -119,7 +119,7 @@ class JoinTransform(
     joined.select(columns: _*)
   }
 
-  def resolveConflict(left: DataFrame, right: DataFrame): List[Column] = {
+  private def resolveConflict(left: DataFrame, right: DataFrame): List[Column] = {
     // 冲突策略
     val conflicts: String = Option(cs).getOrElse(ConflictStrategy.DEFAULT)
     // 左表改名前缀
