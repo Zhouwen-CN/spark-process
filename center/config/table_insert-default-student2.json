@@ -21,6 +21,7 @@
   "transforms": [
     {
       "clazz": "JoinTransform",
+      "func": "left",
       "cs": "l",
       "condition": "l.id = r.id"
     },
