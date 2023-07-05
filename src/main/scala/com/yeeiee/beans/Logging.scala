@@ -1,5 +1,6 @@
 package com.yeeiee.beans
 
+import com.yeeiee.constants.StringConstant
 import org.slf4j.{Logger, LoggerFactory}
 
 /**
@@ -12,7 +13,7 @@ trait Logging {
   private var logger: Logger = _
 
   protected def logName: String = {
-    this.getClass.getName.stripSuffix("$")
+    this.getClass.getName.stripSuffix(StringConstant.DOLLAR)
   }
 
   private def log: Logger = {

@@ -15,7 +15,7 @@ class HiveSink(
                 mode: String,
                 table: String,
                 partition: String,
-                columns: List[String] = List.empty[String]
+                columns: List[String]
               ) extends AbstractSink {
   override protected def getSinkFeature: String = table
 
@@ -28,7 +28,7 @@ class HiveSink(
   }
 
   private def getOutputColumns(context: ContextManager): List[String] = {
-    if (Option(columns).getOrElse(List.empty[String]).nonEmpty) {
+    if (Option(columns).isDefined) {
       columns
     } else {
       val desc: List[String] = context.session

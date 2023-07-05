@@ -18,17 +18,17 @@ class CommonSingleSinkFlow(
                           ) extends AbstractFlow(config) {
   override def run(param: ParamManager): Unit = {
     val context: ContextManager = createContext(param)
-    var tableNames: List[DataFrame] = sources.map(s => SourceFactory.build(s).run(context))
+    var dfs: List[DataFrame] = sources.map(s => SourceFactory.build(s).run(context))
 
     // 当为null 或者 为空时, 打印日志
     transforms match {
       case List(x, _*) => transforms.foreach {
         transform =>
-          tableNames = TransformFactory.build(transform).run(context, tableNames)
+          dfs = TransformFactory.build(transform).run(context, dfs)
       }
       case _ => logWarning("common single sink flow transforms is empty ...")
     }
 
-    SinkFactory.build(sink).run(context, tableNames.head)
+    SinkFactory.build(sink).run(context, dfs.head)
   }
 }

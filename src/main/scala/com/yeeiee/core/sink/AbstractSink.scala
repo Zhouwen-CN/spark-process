@@ -21,7 +21,7 @@ abstract class AbstractSink extends Attribute with Sink with Logging {
   private def confirm(context: ContextManager): Boolean = {
     val taskName: String = context.param.get(StringConstant.TASK_NAME)
 
-    // table_insert-default-student1
+    // taskName = table_insert-default-student1
     val taskFeature: String = StringUtil.getWarehouseAndTableName(taskName)
     val sinkFeature: String = getSinkFeature
     logInfo(s"abstractSink will confirm feature: $taskFeature => $sinkFeature ...")

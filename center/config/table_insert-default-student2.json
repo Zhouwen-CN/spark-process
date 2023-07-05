@@ -7,20 +7,29 @@
     {
       "clazz": "HiveSource",
       "table": "default.student"
+    },
+    {
+      "clazz": "HiveSource",
+      "table": "default.address"
     }
   ],
   "sink": {
     "clazz": "HiveSink",
     "mode": "overwrite",
-    "table": "default.student1"
+    "table": "default.student2"
   },
   "transforms": [
+    {
+      "clazz": "JoinTransform",
+      "cs": "l",
+      "condition": "l.id = r.id"
+    },
     {
       "clazz": "ColumnTransform",
       "columns": [
         {
-          "expr": "id*id",
-          "name": "name"
+          "expr": "city",
+          "name": "address"
         }
       ]
     }

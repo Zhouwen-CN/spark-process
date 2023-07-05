@@ -1,7 +1,5 @@
 package com.yeeiee
 
-import scala.collection.mutable.ListBuffer
-
 /**
  * @Author: chen
  * @Date: 2023/7/2
@@ -24,6 +22,8 @@ object SparkTest {
 
     session.sql("select * from " + df).show()*/
 
-    println(ListBuffer(List("zs", "ls", "ww").indices.toList: _*))
+    //    println(ListBuffer(List("zs", "ls", "ww").indices.toList: _*))
+
+    println(Option(List(0)).getOrElse(List.empty[String]).isEmpty)
   }
 }

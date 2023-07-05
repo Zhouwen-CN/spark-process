@@ -12,16 +12,17 @@ import org.apache.spark.sql.functions.expr
  * @Desc:
  */
 class ColumnTransform(columns: List[ColumnElement]) extends SingleOperandTransform {
-  override def realRun(context: ContextManager, doTaskDf: List[DataFrame]): DataFrame = {
-    if (Option(columns).isEmpty) {
+  override def realRun(context: ContextManager, operands: List[DataFrame]): DataFrame = {
+
+    if (Option(columns).getOrElse(List.empty[ColumnElement]).isEmpty) {
       throw new Exception("usage columnTransform but columns is empty ...")
     }
-    var df: DataFrame = doTaskDf.head
+    var operand: DataFrame = operands.head
 
     columns.foreach(e => {
-      df = df.withColumn(e.name, expr(e.expr))
+      operand = operand.withColumn(e.name, expr(e.expr))
     })
 
-    df
+    operand
   }
 }

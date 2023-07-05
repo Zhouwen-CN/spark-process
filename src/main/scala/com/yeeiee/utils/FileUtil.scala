@@ -16,7 +16,7 @@ object FileUtil {
       file = Source.fromFile(path, encode)
       file.mkString
     } catch {
-      case e: Exception => throw new Exception(s"cannot read file path [${path}]")
+      case e: Exception => throw new Exception(s"cannot read file path [ $path ] ...")
     } finally {
       if (Option(file).isDefined) {
         file.close()

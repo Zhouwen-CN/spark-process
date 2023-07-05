@@ -13,21 +13,15 @@ import scala.collection.mutable.ListBuffer
  */
 abstract class AbstractTransform extends TransformAttribute with Transform with Logging {
 
-  def realRun(context: ContextManager, doTaskDf: List[DataFrame]): DataFrame
+  def realRun(context: ContextManager, operands: List[DataFrame]): DataFrame
 
   override def run(context: ContextManager, dfs: List[DataFrame]): List[DataFrame] = {
-    // 操作数列表
-    val oss: List[Int] = getOss
-    // 操作数个数
-    val osn: Int = getOsn
-    // 默认操作数列表
-    val ossDefault: List[Int] = getOssDefault
     // 操作数列表,没有给定取默认
-    val realOss: List[Int] = if (oss.nonEmpty) oss else ossDefault
+    val realOss: List[Int] = if (getOss.nonEmpty) getOss else getOssDefault
 
     // 取出指定的操作数个数
     var doTaskOss: ListBuffer[Int] = ListBuffer[Int](realOss: _*)
-    doTaskOss = if (osn > 0) doTaskOss.take(osn) else doTaskOss
+    doTaskOss = if (getOsn > 0) doTaskOss.take(getOsn) else doTaskOss
 
     // 如果操作数为空,则取所有的操作数
     if (doTaskOss.isEmpty) {
