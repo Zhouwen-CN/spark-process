@@ -6,7 +6,7 @@ set -e
 
 function check_empty(){
     if [[ -z $2 ]]; then
-        echo "check parameter empty error, $1 = $2"
+        echo "check parameter empty error, $1 = $2 ..."
         exit 1
     else
         echo "print parameter, $1 = $2"
@@ -17,7 +17,7 @@ function search_file() {
   result=`find $1 -name "$2"`
   number=`find $1 -name "$2" | wc -l`
   if [ $number -ne 1 ]; then
-      echo "search config file error, must be get 1 but get $number"
+      echo "search config file error, must be get 1 but get $number ..."
       return 0
   fi
   echo $result
@@ -74,6 +74,6 @@ echo "print parameter, jar_param = ${jar_param[*]}"
 
 # 提交任务
 submit_cmd="${submit_tool} ${master_config} ${log_config} ${file_config} ${main_jar} ${jar_param[*]}"
-echo "do submit command, submit_cmd=$submit_cmd"
+echo "submit_cmd=$submit_cmd"
 
 $submit_cmd
