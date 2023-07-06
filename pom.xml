@@ -176,6 +176,9 @@
                                 <copy file="${project.build.directory}/${output.jar}"
                                       tofile="${output.dir}/${output.jar}"
                                       overwrite="true"/>
+                                <copy file="${project.build.directory}/classes/log4j.properties"
+                                      tofile="${output.dir}/log4j.properties"
+                                      overwrite="true"/>
                             </target>
                         </configuration>
                     </execution>
