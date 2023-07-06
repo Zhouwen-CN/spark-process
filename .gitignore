@@ -2,4 +2,3 @@
 target
 logs
 /center/spark-process-1.0-jar-with-dependencies.jar
-/center/log4j.properties

@@ -50,13 +50,11 @@ center_dir=${project_dir}/center
 config_dir=${center_dir}/config
 core_jar_file=spark-process-1.0-jar-with-dependencies.jar
 config_file=${task_name}.json
-center_log4j_file=${center_dir}/log4j.properties
 user_config_file=`search_file ${config_dir} ${config_file}`
 
 # spark提交参数封装
 submit_tool="spark-submit"
 master_config="--master yarn --deploy-mode client"
-log_config="--conf spark.driver.extraJavaOptions=-Dlog4j.configuration=file:${center_log4j_file} --conf spark.executor.extraJavaOptions=-Dlog4j.configuration=file:${center_log4j_file}"
 file_config="--files ${user_config_file}"
 main_jar="${center_dir}/${core_jar_file}"
 
@@ -73,7 +71,7 @@ done;
 echo "print parameter, jar_param = ${jar_param[*]}"
 
 # 提交任务
-submit_cmd="${submit_tool} ${master_config} ${log_config} ${file_config} ${main_jar} ${jar_param[*]}"
+submit_cmd="${submit_tool} ${master_config} ${file_config} ${main_jar} ${jar_param[*]}"
 echo "submit_cmd=$submit_cmd"
 
 $submit_cmd
