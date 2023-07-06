@@ -145,7 +145,7 @@ class SessionProxy(appName: String, userConfig: ConfigManager, jobParam: ParamMa
         builder.config(SPARK_SHUFFLE_PARTITIONS, shufflePartitions)
 
       case _ =>
-        logWarning("not support proxy config: $key = $value")
+        logWarning(s"not support proxy config: $key = $value")
 
     }
   }
