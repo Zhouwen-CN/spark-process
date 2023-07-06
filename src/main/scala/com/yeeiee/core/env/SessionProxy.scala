@@ -65,11 +65,11 @@ class SessionProxy(appName: String, userConfig: ConfigManager, jobParam: ParamMa
   private val defaultConfig: Map[String, String] = Map[String, String](
     SPARK_YARN_QUEUE -> "default",
     SPARK_DRIVER_CORES -> "1",
-    SPARK_DRIVER_MEMORY -> "1024M",
-    SPARK_EXECUTOR_MEMORY -> "2048M",
-    SPARK_EXECUTOR_CORES -> "2",
+    SPARK_DRIVER_MEMORY -> "512M",
+    SPARK_EXECUTOR_MEMORY -> "1024M",
+    SPARK_EXECUTOR_CORES -> "1",
     SPARK_EXECUTORS_MAX -> "4",
-    SPARK_SHUFFLE_PARTITIONS -> "16",
+    SPARK_SHUFFLE_PARTITIONS -> "8",
     SPARK_ADAPTIVE_ENABLED -> "true",
     SPARK_AUTO_BROADCAST_JOIN_THRESHOLD -> "20971520",
     SPARK_BROADCAST_TIMEOUT -> "300",
@@ -105,7 +105,8 @@ class SessionProxy(appName: String, userConfig: ConfigManager, jobParam: ParamMa
     userConfig.foreach(item => config(builder, item))
 
     // todo 临时修改
-    builder.master("local[2]")
+
+    //    builder.master("local[2]")
 
     val session: SparkSession = builder.enableHiveSupport().getOrCreate()
 
