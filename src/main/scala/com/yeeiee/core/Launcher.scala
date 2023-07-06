@@ -23,7 +23,7 @@ object Launcher extends Logging {
      */
     // todo 临时修改
     System.setProperty("HADOOP_USER_NAME", "atguigu")
-    val params: List[String] = List("D:\\work\\idea\\spark-process\\center\\config\\table_insert-default-student2.json", "task_name=table_insert-default-student2", "task_time=20230702")
+    val params: List[String] = args.toList
     val taskConfigPath: String = params.head
     logInfo(s"loading task config path: [ $taskConfigPath ]")
     val realParams: List[String] = params.tail

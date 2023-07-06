@@ -74,5 +74,6 @@ echo "print parameter, jar_param = ${jar_param[*]}"
 
 # 提交任务
 submit_cmd="${submit_tool} ${master_config} ${log_config} ${file_config} ${main_jar} ${jar_param[*]}"
+echo "do submit command, submit_cmd=$submit_cmd"
 
-echo $submit_cmd
+$submit_cmd
