@@ -18,9 +18,15 @@ import java.util.UUID
  * @Desc:
  */
 object SessionProxy {
+  /**
+   * 自定义配置
+   */
   private val PROXY_CONFIG: String = "proxy."
   private val TASK_PARALLELISM_MAX: String = "proxy.task.parallelism.max"
 
+  /**
+   * 基本参数
+   */
   private val SPARK_YARN_QUEUE: String = "spark.yarn.queue"
   private val SPARK_DRIVER_CORES: String = "spark.driver.cores"
   private val SPARK_DRIVER_MEMORY: String = "spark.driver.memory"
