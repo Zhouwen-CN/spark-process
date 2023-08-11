@@ -6,6 +6,5 @@ package com.yeeiee.beans
  * @Desc:
  */
 case class AggElement(
-                       func: String,
-                       name: String
-                     )
+    func: String,
+    name: String)

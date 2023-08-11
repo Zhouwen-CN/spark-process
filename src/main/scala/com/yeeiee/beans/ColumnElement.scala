@@ -6,6 +6,5 @@ package com.yeeiee.beans
  * @Desc:
  */
 case class ColumnElement(
-                          expr: String,
-                          name: String
-                        )
+    expr: String,
+    name: String)

@@ -1,10 +1,10 @@
 package com.yeeiee.core.transform.abs
 
+import scala.collection.mutable.ListBuffer
+
 import com.yeeiee.beans.{Logging, TransformAttribute}
 import com.yeeiee.core.env.ContextManager
 import org.apache.spark.sql.DataFrame
-
-import scala.collection.mutable.ListBuffer
 
 /**
  * @Author: chen

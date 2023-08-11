@@ -8,15 +8,15 @@ import com.yeeiee.constants.StringConstant
  * @Desc:
  */
 object SqlUtil {
-  def partition(partition: String):String = {
+  def partition(partition: String): String = {
     if (Option(partition).getOrElse("").nonEmpty) {
       s"partition($partition) "
-    }else{
+    } else {
       StringConstant.EMPTY
     }
   }
 
-  def insert(mode: String, out:String):String = {
+  def insert(mode: String, out: String): String = {
     s"insert $mode table ${checkTable(out)} "
   }
 

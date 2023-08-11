@@ -11,11 +11,10 @@ import org.apache.spark.sql.DataFrame
  * @Desc:
  */
 class CommonSingleSinkFlow(
-                            config: Any,
-                            sources: List[Any],
-                            transforms: List[Any],
-                            sink: Any
-                          ) extends AbstractFlow(config) {
+    config: Any,
+    sources: List[Any],
+    transforms: List[Any],
+    sink: Any) extends AbstractFlow(config) {
   override def run(param: ParamManager): Unit = {
     val context: ContextManager = createContext(param)
     var dfs: List[DataFrame] = sources.map(s => SourceFactory.build(s).run(context))
@@ -23,9 +22,9 @@ class CommonSingleSinkFlow(
     // 当为null 或者 为空时, 打印日志
     transforms match {
       case List(x, _*) => transforms.foreach {
-        transform =>
-          dfs = TransformFactory.build(transform).run(context, dfs)
-      }
+          transform =>
+            dfs = TransformFactory.build(transform).run(context, dfs)
+        }
       case _ => logWarning("common single sink flow transforms is empty ...")
     }
 

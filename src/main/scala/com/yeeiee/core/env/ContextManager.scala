@@ -8,7 +8,6 @@ import com.yeeiee.core.params.ParamManager
  * @Desc:
  */
 case class ContextManager(
-                           session: SessionProxy,
-                           config: ConfigManager,
-                           param: ParamManager
-                         )
+    session: SessionProxy,
+    config: ConfigManager,
+    param: ParamManager)

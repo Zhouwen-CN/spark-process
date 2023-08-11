@@ -11,5 +11,3 @@ import com.yeeiee.core.transform.abs.Transform
 object TransformFactory extends AbstractFactory[Transform] {
   override protected def getPackagePrefixes: List[String] = List(PackagePrefix.TRANSFORM.toString)
 }
-
-

@@ -8,7 +8,8 @@ import org.apache.spark.sql.DataFrame
  * @Date: 2023/7/5
  * @Desc: 2.4有intersectAll
  */
-class IntersectTransform(alignment: Boolean, distinct: Boolean) extends AssembleTransform(alignment, distinct) {
+class IntersectTransform(alignment: Boolean, distinct: Boolean)
+  extends AssembleTransform(alignment, distinct) {
 
   override protected def assemble(head: DataFrame, other: DataFrame): DataFrame = {
     head.intersect(other)

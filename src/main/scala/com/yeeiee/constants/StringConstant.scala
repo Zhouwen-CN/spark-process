@@ -26,6 +26,6 @@ object StringConstant extends Serializable {
   val TRUE: String = "true"
   val FALSE: String = "false"
 
-  val TASK_NAME:String = "task_name"
-  val TASK_TIME:String = "task_time"
+  val TASK_NAME: String = "task_name"
+  val TASK_TIME: String = "task_time"
 }

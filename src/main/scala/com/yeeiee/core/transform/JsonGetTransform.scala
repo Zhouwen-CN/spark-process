@@ -3,7 +3,7 @@ package com.yeeiee.core.transform
 import com.yeeiee.constants.{NumberConstant, StringConstant}
 import com.yeeiee.core.env.ContextManager
 import com.yeeiee.core.transform.abs.SingleOperandTransform
-import org.apache.spark.sql.{DataFrame, functions}
+import org.apache.spark.sql.{functions, DataFrame}
 
 /**
  * @Author: chen
@@ -19,10 +19,10 @@ class JsonGetTransform(column: String, path: String, name: String) extends Singl
       throw new Exception("the json get transform you should configure path value ...")
     }
 
-    val realName: String = if (Option(name).getOrElse(StringConstant.EMPTY).nonEmpty) name else column
+    val realName: String =
+      if (Option(name).getOrElse(StringConstant.EMPTY).nonEmpty) name else column
     original.withColumn(
       realName,
-      functions.get_json_object(original(column), path)
-    )
+      functions.get_json_object(original(column), path))
   }
 }

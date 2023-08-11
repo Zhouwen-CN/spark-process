@@ -1,14 +1,13 @@
 package com.yeeiee.core.transform
 
+import scala.collection.mutable.ListBuffer
 
 import com.yeeiee.constants.{NumberConstant, StringConstant}
 import com.yeeiee.core.env.ContextManager
 import com.yeeiee.core.transform.JoinTransform._
 import com.yeeiee.core.transform.abs.DoubleOperandTransform
-import org.apache.spark.sql.functions.{broadcast, expr}
 import org.apache.spark.sql.{Column, DataFrame, Dataset, Row}
-
-import scala.collection.mutable.ListBuffer
+import org.apache.spark.sql.functions.{broadcast, expr}
 
 /**
  * @Author: chen
@@ -16,6 +15,7 @@ import scala.collection.mutable.ListBuffer
  * @Desc:
  */
 object JoinTransform {
+
   /**
    * join类型
    */
@@ -63,14 +63,12 @@ object JoinTransform {
 }
 
 class JoinTransform(
-                     func: String,
-                     cs: String,
-                     rpl: String,
-                     rpr: String,
-                     bs: String,
-                     condition: String
-                   ) extends DoubleOperandTransform {
-
+    func: String,
+    cs: String,
+    rpl: String,
+    rpr: String,
+    bs: String,
+    condition: String) extends DoubleOperandTransform {
 
   override protected def realRun(context: ContextManager, operands: List[DataFrame]): DataFrame = {
     val left: Dataset[Row] = operands(NumberConstant.NUMBER_0).alias(TableAlias.LEFT)
@@ -101,7 +99,12 @@ class JoinTransform(
     expr(condition)
   }
 
-  private def doJoin(left: DataFrame, right: DataFrame, joinType: String, broadcastStrategy: String, onCondition: Column): DataFrame = {
+  private def doJoin(
+      left: DataFrame,
+      right: DataFrame,
+      joinType: String,
+      broadcastStrategy: String,
+      onCondition: Column): DataFrame = {
     // 处理冲突字段
     val columns: List[Column] = resolveConflict(left, right)
 
@@ -137,17 +140,38 @@ class JoinTransform(
 
     leftNames.foreach {
       name =>
-        appendResultColumn(result, ConflictStrategy.LEFT, conflicts, left, name, renameRpl, intersect)
+        appendResultColumn(
+          result,
+          ConflictStrategy.LEFT,
+          conflicts,
+          left,
+          name,
+          renameRpl,
+          intersect)
     }
     rightNames.foreach {
       name =>
-        appendResultColumn(result, ConflictStrategy.RIGHT, conflicts, right, name, renameRpr, intersect)
+        appendResultColumn(
+          result,
+          ConflictStrategy.RIGHT,
+          conflicts,
+          right,
+          name,
+          renameRpr,
+          intersect)
     }
 
     result.toList
   }
 
-  private def appendResultColumn(result: ListBuffer[Column], current: String, strategy: String, df: DataFrame, name: String, prefix: String, intersect: List[String]): Unit = {
+  private def appendResultColumn(
+      result: ListBuffer[Column],
+      current: String,
+      strategy: String,
+      df: DataFrame,
+      name: String,
+      prefix: String,
+      intersect: List[String]): Unit = {
     val column: Column = df(name)
     if (intersect.contains(name)) {
       strategy match {
@@ -168,5 +192,3 @@ class JoinTransform(
     }
   }
 }
-
-

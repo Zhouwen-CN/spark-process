@@ -10,7 +10,8 @@ import org.apache.spark.sql.DataFrame
  * @Date: 2023/7/5
  * @Desc:
  */
-class SelectTransform(matched: List[String], unmatched: List[String]) extends SingleOperandTransform {
+class SelectTransform(matched: List[String], unmatched: List[String])
+  extends SingleOperandTransform {
 
   override protected def realRun(context: ContextManager, operands: List[DataFrame]): DataFrame = {
     val operand: DataFrame = operands(NumberConstant.NUMBER_0)

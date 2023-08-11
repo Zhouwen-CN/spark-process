@@ -12,6 +12,7 @@ import org.apache.spark.sql.DataFrame
  * @Desc:
  */
 abstract class AbstractSink extends Attribute with Sink with Logging {
+
   /**
    * 检查任务名称和sink表名是否一致
    *

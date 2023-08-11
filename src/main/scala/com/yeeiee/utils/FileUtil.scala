@@ -1,8 +1,8 @@
 package com.yeeiee.utils
 
-import com.yeeiee.constants.CharsetConstant
-
 import scala.io.{BufferedSource, Source}
+
+import com.yeeiee.constants.CharsetConstant
 
 /**
  * @Author: chen

@@ -3,15 +3,16 @@ package com.yeeiee.core.transform
 import com.yeeiee.constants.NumberConstant
 import com.yeeiee.core.env.ContextManager
 import com.yeeiee.core.transform.abs.SingleOperandTransform
-import org.apache.spark.sql.functions.expr
 import org.apache.spark.sql.{Column, DataFrame}
+import org.apache.spark.sql.functions.expr
 
 /**
  * @Author: chen
  * @Date: 2023/7/5
  * @Desc:
  */
-class RepartitionTransform(number: Int, shuffle: Boolean, range: Boolean, exprs: List[String]) extends SingleOperandTransform {
+class RepartitionTransform(number: Int, shuffle: Boolean, range: Boolean, exprs: List[String])
+  extends SingleOperandTransform {
 
   override protected def realRun(context: ContextManager, operands: List[DataFrame]): DataFrame = {
     val operand: DataFrame = operands(NumberConstant.NUMBER_0)
@@ -31,17 +32,20 @@ class RepartitionTransform(number: Int, shuffle: Boolean, range: Boolean, exprs:
     val columns: List[Column] = getColumns
 
     if (getRange) {
+
       /**
        * 按照给定column的范围划分,比如col范围在1~10000,partition=4
        * 那么: 0~2500,2500~5000,5000~7500,7500~10000
        * 使用range重分区时,必须指定排序列
        */
       if (columns.isEmpty) {
-        throw new Exception("the repartition transform usage repartition by range you should configure columns ...")
+        throw new Exception(
+          "the repartition transform usage repartition by range you should configure columns ...")
       } else {
         df.repartitionByRange(partition, columns: _*)
       }
     } else {
+
       /**
        * 相当于hive sql: distribute by column
        * 或者 distribute by range

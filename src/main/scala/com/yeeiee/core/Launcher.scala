@@ -7,7 +7,6 @@ import com.yeeiee.core.flow.Flow
 import com.yeeiee.core.params.{KeyValueParamManager, ParamManager}
 import com.yeeiee.utils.FileUtil
 
-
 /**
  * @Author: chen
  * @Date: 2023/7/2
@@ -15,6 +14,7 @@ import com.yeeiee.utils.FileUtil
  */
 object Launcher extends Logging {
   def main(args: Array[String]): Unit = {
+
     /**
      * 模拟参数,脚本接受任务名称和分区日期,解析并封装参数
      * 1.配置文件名称 = 任务名称.json

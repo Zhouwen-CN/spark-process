@@ -16,13 +16,15 @@ object SparkTest {
 
     import session.implicits._
     val df1: DataFrame = session.sparkContext.makeRDD(Seq(
-      ("a", 1), ("a", 1), ("b", 3), ("c", 4)
-    )).toDF("id", "name")
+      ("a", 1),
+      ("a", 1),
+      ("b", 3),
+      ("c", 4))).toDF("id", "name")
 
     val df2: DataFrame = session.sparkContext.makeRDD(Seq(
-      ("a", 1), ("a", 1), ("b", 3)
-    )).toDF("name", "id")
-
+      ("a", 1),
+      ("a", 1),
+      ("b", 3))).toDF("name", "id")
 
     df1.intersect(df2).show()
 

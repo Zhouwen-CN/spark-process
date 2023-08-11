@@ -3,15 +3,16 @@ package com.yeeiee.core.transform.abs
 import com.yeeiee.beans.AggElement
 import com.yeeiee.constants.NumberConstant
 import com.yeeiee.core.env.ContextManager
-import org.apache.spark.sql.functions.expr
 import org.apache.spark.sql.{Column, DataFrame, Dataset, RelationalGroupedDataset}
+import org.apache.spark.sql.functions.expr
 
 /**
  * @Author: chen
  * @Date: 2023/7/5
  * @Desc:
  */
-abstract class AggregateTransform(groups: List[String], aggs: List[AggElement]) extends SingleOperandTransform {
+abstract class AggregateTransform(groups: List[String], aggs: List[AggElement])
+  extends SingleOperandTransform {
 
   override protected def realRun(context: ContextManager, operands: List[DataFrame]): DataFrame = {
     val original: DataFrame = operands(NumberConstant.NUMBER_0)
@@ -39,5 +40,7 @@ abstract class AggregateTransform(groups: List[String], aggs: List[AggElement]) 
 
   private def getAggColumn(agg: AggElement): Column = expr(agg.func).name(agg.name)
 
-  protected def getRGDataset[T](original: Dataset[T], groupColumn: List[Column]): RelationalGroupedDataset
+  protected def getRGDataset[T](
+      original: Dataset[T],
+      groupColumn: List[Column]): RelationalGroupedDataset
 }

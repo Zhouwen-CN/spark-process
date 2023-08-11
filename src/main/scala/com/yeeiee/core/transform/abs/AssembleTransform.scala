@@ -11,7 +11,8 @@ import org.apache.spark.sql.DataFrame
  *        unionByName按照字段join,但是交集差集是按字段顺序的
  *        这里统一处理
  */
-abstract class AssembleTransform(alignment: Boolean, distinct: Boolean) extends MultipleOperandTransform {
+abstract class AssembleTransform(alignment: Boolean, distinct: Boolean)
+  extends MultipleOperandTransform {
 
   override protected def realRun(context: ContextManager, operands: List[DataFrame]): DataFrame = {
     // 检查传入的表是否超过两个,小于两个无法union
@@ -27,11 +28,12 @@ abstract class AssembleTransform(alignment: Boolean, distinct: Boolean) extends 
 
     for (i <- NumberConstant.NUMBER_1 until operands.length) {
 
-      val operand: DataFrame = if (Option(alignment).getOrElse(NumberConstant.TRUE)) {
-        operands(i).selectExpr(headColumns: _*)
-      } else {
-        operands(i)
-      }
+      val operand: DataFrame =
+        if (Option(alignment).getOrElse(NumberConstant.TRUE)) {
+          operands(i).selectExpr(headColumns: _*)
+        } else {
+          operands(i)
+        }
 
       assemble(head, operand)
     }

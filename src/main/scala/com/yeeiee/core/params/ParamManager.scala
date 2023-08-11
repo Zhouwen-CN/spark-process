@@ -14,7 +14,6 @@ trait ParamManager {
 
   def foreach(f: ((String, String)) => Unit): Unit
 
-
   def wrapParamKey(key: String): String = {
     StringConstant.DOLLAR + StringConstant.LEFT_BRACE + key + StringConstant.RIGHT_BRACE
   }

@@ -9,9 +9,12 @@ import org.apache.spark.sql.{Column, Dataset, RelationalGroupedDataset}
  * @Date: 2023/7/5
  * @Desc:
  */
-class RollupTransform(groups: List[String], aggs: List[AggElement]) extends AggregateTransform(groups, aggs) {
+class RollupTransform(groups: List[String], aggs: List[AggElement])
+  extends AggregateTransform(groups, aggs) {
 
-  override protected def getRGDataset[T](original: Dataset[T], groupColumn: List[Column]): RelationalGroupedDataset = {
+  override protected def getRGDataset[T](
+      original: Dataset[T],
+      groupColumn: List[Column]): RelationalGroupedDataset = {
     original.rollup(groupColumn: _*)
   }
 }

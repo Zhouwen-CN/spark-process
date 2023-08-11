@@ -1,16 +1,16 @@
 package com.yeeiee.core.env
 
+import java.util.UUID
+
 import com.yeeiee.beans.Logging
 import com.yeeiee.constants.StringConstant
 import com.yeeiee.core.env.SessionProxy._
 import com.yeeiee.core.params.ParamManager
 import com.yeeiee.utils.SqlUtil
 import org.apache.spark.SparkContext
+import org.apache.spark.sql.{DataFrame, SparkSession, SQLContext}
 import org.apache.spark.sql.catalog.Catalog
 import org.apache.spark.sql.expressions.UserDefinedFunction
-import org.apache.spark.sql.{DataFrame, SQLContext, SparkSession}
-
-import java.util.UUID
 
 /**
  * @Author: chen
@@ -18,6 +18,7 @@ import java.util.UUID
  * @Desc:
  */
 object SessionProxy {
+
   /**
    * 自定义配置
    */
@@ -32,26 +33,32 @@ object SessionProxy {
   private val SPARK_DRIVER_MEMORY: String = "spark.driver.memory"
   private val SPARK_EXECUTOR_MEMORY: String = "spark.executor.memory"
   private val SPARK_EXECUTOR_CORES: String = "spark.executor.cores"
+
   /**
    * 动态分配
    */
   private val SPARK_EXECUTORS_MAX: String = "spark.dynamicAllocation.maxExecutors"
+
   /**
    * executor number * executor core * 2
    */
   private val SPARK_SHUFFLE_PARTITIONS: String = "spark.sql.shuffle.partitions"
+
   /**
    * 自适应查询
    */
   private val SPARK_ADAPTIVE_ENABLED: String = "spark.sql.adaptive.enabled"
+
   /**
    * 广播join阈值, 20兆
    */
   private val SPARK_AUTO_BROADCAST_JOIN_THRESHOLD: String = "spark.sql.autoBroadcastJoinThreshold"
+
   /**
    * 广播超时
    */
   private val SPARK_BROADCAST_TIMEOUT: String = "spark.sql.broadcastTimeout"
+
   /**
    * hive参数
    */
@@ -60,7 +67,8 @@ object SessionProxy {
   private val HIVE_DYNAMIC_PARTITION_MAX: String = "hive.exec.max.dynamic.partitions"
 }
 
-class SessionProxy(appName: String, userConfig: ConfigManager, jobParam: ParamManager) extends Logging {
+class SessionProxy(appName: String, userConfig: ConfigManager, jobParam: ParamManager)
+  extends Logging {
 
   private val defaultConfig: Map[String, String] = Map[String, String](
     SPARK_YARN_QUEUE -> "default",
@@ -75,15 +83,14 @@ class SessionProxy(appName: String, userConfig: ConfigManager, jobParam: ParamMa
     SPARK_BROADCAST_TIMEOUT -> "300",
     HIVE_DYNAMIC_PARTITION_ON -> "true",
     HIVE_DYNAMIC_PARTITION_MODE -> "nonstrict",
-    HIVE_DYNAMIC_PARTITION_MAX -> "1000"
-  )
+    HIVE_DYNAMIC_PARTITION_MAX -> "1000")
 
   /**
    * 自定义函数
    */
-  private val userDefineFunctionRegister: Map[String, UserDefinedFunction] = Map[String, UserDefinedFunction](
-
-  )
+  private val userDefineFunctionRegister: Map[String, UserDefinedFunction] =
+    Map[String, UserDefinedFunction](
+    )
 
   private val sparkSession: SparkSession = initialize()
   private val sparkConfig: Map[String, String] = configs
@@ -177,7 +184,8 @@ class SessionProxy(appName: String, userConfig: ConfigManager, jobParam: ParamMa
   }
 
   def insertTable(output: DataFrame, mode: String, out: String, partition: String): Unit = {
-    val uuid: String = UUID.randomUUID().toString.replaceAll(StringConstant.STRIKETHROUGH, StringConstant.EMPTY)
+    val uuid: String =
+      UUID.randomUUID().toString.replaceAll(StringConstant.STRIKETHROUGH, StringConstant.EMPTY)
     output.createOrReplaceTempView(uuid)
     val sqlText: String =
       s"""
