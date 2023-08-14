@@ -1,16 +1,16 @@
 package com.yeeiee.core.env
 
-import java.util.UUID
-
 import com.yeeiee.beans.Logging
 import com.yeeiee.constants.StringConstant
 import com.yeeiee.core.env.SessionProxy._
 import com.yeeiee.core.params.ParamManager
 import com.yeeiee.utils.SqlUtil
 import org.apache.spark.SparkContext
-import org.apache.spark.sql.{DataFrame, SparkSession, SQLContext}
 import org.apache.spark.sql.catalog.Catalog
 import org.apache.spark.sql.expressions.UserDefinedFunction
+import org.apache.spark.sql.{DataFrame, SQLContext, SparkSession}
+
+import java.util.UUID
 
 /**
  * @Author: chen
@@ -60,6 +60,17 @@ object SessionProxy {
   private val SPARK_BROADCAST_TIMEOUT: String = "spark.sql.broadcastTimeout"
 
   /**
+   * 读取字段数量
+   */
+  private val SPARK_DEBUG_MAX_FIELDS: String = "spark.debug.maxToStringFields"
+
+  /**
+   * 使用内置的 reader 和 writer 操作 parquet orc 格式
+   */
+  private val SPARK_CONVERT_METASTORE_PARQUET: String = "spark.sql.hive.convertMetastoreParquet"
+  private val SPARK_CONVERT_METASTORE_ORC: String = "spark.sql.hive.convertMetastoreOrc"
+
+  /**
    * hive参数
    */
   private val HIVE_DYNAMIC_PARTITION_ON: String = "hive.exec.dynamic.partition"
@@ -81,6 +92,9 @@ class SessionProxy(appName: String, userConfig: ConfigManager, jobParam: ParamMa
     SPARK_ADAPTIVE_ENABLED -> "true",
     SPARK_AUTO_BROADCAST_JOIN_THRESHOLD -> "20971520",
     SPARK_BROADCAST_TIMEOUT -> "300",
+    SPARK_DEBUG_MAX_FIELDS -> "1000",
+    SPARK_CONVERT_METASTORE_PARQUET -> "true",
+    SPARK_CONVERT_METASTORE_ORC -> "true",
     HIVE_DYNAMIC_PARTITION_ON -> "true",
     HIVE_DYNAMIC_PARTITION_MODE -> "nonstrict",
     HIVE_DYNAMIC_PARTITION_MAX -> "1000")
