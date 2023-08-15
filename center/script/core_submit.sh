@@ -45,11 +45,11 @@ task_time=${args[1]}
 check_empty task_time $task_time
 
 # 临时参数
-project_dir=${cur_dir}/../..
-center_dir=${project_dir}/center
-config_dir=${center_dir}/config
-core_jar_file=spark-process-1.0-jar-with-dependencies.jar
-config_file=${task_name}.json
+project_dir="${cur_dir}/../.."
+center_dir="${project_dir}/center"
+config_dir="${center_dir}/config"
+core_jar_file="spark-process-1.0-jar-with-dependencies.jar"
+config_file="${task_name}.json"
 user_config_file=`search_file ${config_dir} ${config_file}`
 
 # spark提交参数封装
